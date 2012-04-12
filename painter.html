@@ -11,28 +11,40 @@
 	<body>
 		<canvas width="250" height="250" id="myCanvas"></canvas>
 		<script>
+		var hold = false;
 		var canvas = document.getElementById('myCanvas');
-			var ctx = canvas.getContext('2d');
-			
-			
-	          function drawCircle(x, y, radius, color)
-			{	
-				// draw a circle and fill it in
-				ctx.beginPath();
-				ctx.arc(x, y, radius, 0, Math.PI*2, true);
-				ctx.closePath();
-				
-				// set the fill color to red
-				ctx.fillStyle= color || "#FF0000";
-    			ctx.fill();
-			 }
-			  canvas.addEventListener('mousemove', function(event) {
-   console.log('mousemove at (%o, %o)', event.offsetX, event.offsetY);
-     
-   drawCircle(event.offsetX, event.offsetY, 6) 
-  });
-
-			
+		var ctx = canvas.getContext('2d');
+		
+		
+		function drawCircle(x, y, radius, color)
+		{	
+			// draw a circle and fill it in
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, Math.PI*2, true);
+			ctx.closePath();
+		
+			// set the fill color to red
+			ctx.fillStyle= color || "#222222";
+			ctx.fill();
+		}
+		
+		canvas.addEventListener('mousemove', function(event) {
+			console.log('mousemove at (%o, %o)', event.offsetX, event.offsetY);
+			if (hold==true)
+ 			{
+				drawCircle(event.offsetX, event.offsetY, 6);
+  			}
+		});
+		
+		canvas.addEventListener('mousedown', function(event)  {
+			console.log('mousedown', event.offsetX, event.offsetY);
+			hold=true;
+		});
+		
+		canvas.addEventListener('mouseup', function(event) {
+			console.log('mouseup', event.offsetX, event.offsetY);
+			hold=false
+		});
 			
 		</script>
 	</body>
